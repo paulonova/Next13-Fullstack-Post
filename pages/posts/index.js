@@ -1,17 +1,25 @@
 import React from "react";
+import styles from "./AllPosts.module.css";
+import PostsGrid from "@/components/PostsGrid";
+import { getFeaturedPosts } from "@/lib/post-util";
 
-function AllPostsPage() {
+function AllPosts({ posts }) {
   return (
-    <div>
-      <h1>All Posts Page</h1>
-    </div>
+    <section className={styles.posts}>
+      <h1>All Posts</h1>
+      <PostsGrid posts={posts} />
+    </section>
   );
 }
 
-export default AllPostsPage;
+export function getStaticProps() {
+  const featuredPosts = getFeaturedPosts();
 
-/**
- * 1- Hero
- * 2- feature Posts
- *
- */
+  return {
+    props: {
+      posts: featuredPosts,
+    },
+  };
+}
+
+export default AllPosts;
